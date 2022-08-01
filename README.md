@@ -3,7 +3,9 @@ Spring cloud POC using either options.
 1) eureka, (currently at this point)
 2) kubernetes (will switch over afterwards)
 
-<done>
-- microservices registered with eureka
-- microservices interfacing through OpenFeign
-- microservices being tracked down with sleugth/zipkin
+
+
+done so far...
+1. microservices registered with eurek
+2. microservices interfacing through OpenFeign
+3. microservices being tracked down with sleugth/zipkin
