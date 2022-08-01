@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
 #  ideally, i would want to create different databases for each microservice.
 #  meaning that I would have to add "postgres-fraud" for "fraud" service
-#  however, since I'm running this in local env. and running out of memories, I'm sticking with the one database
+#  however, since I'm running this in local env. and running out of memories, I'm sticking with just one database
 #  and separate each microservice with separate schema. (i.e. /customer, /fraud, /..
   pgadmin:
     container_name: pgadmin
