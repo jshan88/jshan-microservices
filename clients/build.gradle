@@ -1,6 +1,3 @@
-group 'com.jshan'
-version '0.0.1-SNAPSHOT'
-
 dependencies {
 }
 
