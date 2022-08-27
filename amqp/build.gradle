@@ -1,7 +1,16 @@
+/*bootJar는 스프링 부트 application을 standalone 으로 실행시키기 위한 것들이 포함되기 때문에
+//main 메서드 없이 라이브러리의 역할 하는 모듈 이라면 해당 설정을 비활성화 해야 합니다.
+//그리고 명시적으로 jar task를 실행시키겠다고 작성을 해줘야 오류가 발생하지 않습니다.
+ */
+tasks.named("bootJar") {
+    enabled = false
+}
+tasks.named("jar") {
+    enabled = true
+}
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
 }
-
 test {
     useJUnitPlatform()
 }

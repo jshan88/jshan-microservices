@@ -2,17 +2,12 @@ plugins {
 	id 'org.springframework.boot' version '2.7.2'
 	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
 	id 'java'
+	id 'com.google.cloud.tools.jib' version '3.2.1' apply false
 }
 
-group = 'com.jshan'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
+//group = 'com.jshan'
+//version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()
@@ -21,21 +16,23 @@ repositories {
 dependencies {
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
-
 subprojects {
 	apply plugin : 'java'
 	apply plugin : 'org.springframework.boot'
 	apply plugin : 'io.spring.dependency-management'
 
-	group = 'com.loyalty.jshan'
+	group = 'com.jshan'
 	version = '0.0.1-SNAPSHOT'
 	sourceCompatibility = '17'
 
 	repositories {
 		mavenCentral()
+	}
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
 	}
 
 	ext {
@@ -50,7 +47,30 @@ subprojects {
 		compileOnly 'org.projectlombok:lombok'
 		annotationProcessor 'org.projectlombok:lombok'
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
 		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	}
+	tasks.named("bootJar") {
+		archiveClassifier = 'boot'
+	}
+	tasks.named("jar") {
+		archiveClassifier = ''
+	}
+}
+
+project(':customer') {
+	dependencies {
+		implementation project(':clients')
+		implementation project(':amqp')
+	}
+}
+project(':fraud') {
+	dependencies {
+		implementation project(':clients')
+	}
+}
+project(':notification') {
+	dependencies {
+		implementation project(':clients')
+		implementation project(':amqp')
 	}
 }

@@ -1,3 +1,21 @@
+plugins {
+    id 'com.google.cloud.tools.jib'
+}
+
+bootJar {
+    baseName = 'eureka-server'
+//    version =  '0.0.1'
+}
+jib {
+    from {
+        image = "eclipse-temurin:17-jre"
+    }
+    to {
+        image = "jshan88/${bootJar.baseName}:${bootJar.version}"
+        tags = ['latest']
+    }
+}
+
 dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
     implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
